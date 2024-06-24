@@ -1,7 +1,9 @@
 package com.fastcampus.projectboard.domain;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+
 import javax.persistence.*;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -17,12 +19,12 @@ import java.util.Set;
 })
 @Entity
 public class Article extends AuditingFields {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Setter @ManyToOne(optional = false)
-    @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보 (ID)
+    @Setter @ManyToOne(optional = false) @JoinColumn(name = "userId") private UserAccount userAccount; // 유저 정보 (ID)
 
     @Setter @Column(nullable = false) private String title; // 제목
     @Setter @Column(nullable = false, length = 10000) private String content; // 본문
@@ -51,11 +53,13 @@ public class Article extends AuditingFields {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Article article)) return false;
-        return id != null && id.equals(article.id);
+        if (!(o instanceof Article that)) return false;
+        return id != null && id.equals(that.getId());
     }
+
     @Override
     public int hashCode() {
         return Objects.hash(id);
     }
+
 }
