@@ -1,5 +1,7 @@
 package com.fastcampus.projectboard.dto;
+
 import com.fastcampus.projectboard.domain.UserAccount;
+
 import java.time.LocalDateTime;
 
 public record UserAccountDto(
@@ -13,6 +15,11 @@ public record UserAccountDto(
         LocalDateTime modifiedAt,
         String modifiedBy
 ) {
+
+    public static UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo) {
+        return new UserAccountDto(userId, userPassword, email, nickname, memo, null, null, null, null);
+    }
+
     public static UserAccountDto of(String userId, String userPassword, String email, String nickname, String memo, LocalDateTime createdAt, String createdBy, LocalDateTime modifiedAt, String modifiedBy) {
         return new UserAccountDto(userId, userPassword, email, nickname, memo, createdAt, createdBy, modifiedAt, modifiedBy);
     }
@@ -30,6 +37,7 @@ public record UserAccountDto(
                 entity.getModifiedBy()
         );
     }
+
     public UserAccount toEntity() {
         return UserAccount.of(
                 userId,
@@ -39,4 +47,5 @@ public record UserAccountDto(
                 memo
         );
     }
+
 }
